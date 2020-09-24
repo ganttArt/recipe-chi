@@ -16,5 +16,44 @@ figcaption {
 
 .card-body {
     padding: 0.75rem;
-    padding-bottom: 0rem;
+    /* padding-bottom: 0rem; */
+}
+
+
+
+@media screen and (min-width: 668px) {
+    .jumbotron {
+        display: inline-block;
+        max-width: 49%;
+        margin-left: 0%;
+        margin-right: 0%;
+        min-height: 80%
+    }
+
+    #planner-description {
+        max-width: 80%;
+        text-align: center;
+        margin: auto;
+        margin-bottom: 16px;
+    }
+
+    #planner-container {
+        margin-left: .5%;
+        margin-right: .5%;
+    }
+}
+
+@media screen and (min-width:819px) and (max-width: 979px) {
+    #planner-description {
+        max-width: 70%;
+        text-align: center;
+        margin: auto;
+        margin-bottom: 16px;
+    }
+    #recipes-description {
+        max-width: 70%;
+        text-align: center;
+        margin: auto;
+        margin-bottom: 16px;
+    }
 }
