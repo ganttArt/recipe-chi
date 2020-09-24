@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'groceries_app',
-    # 'groceries_app.apps.GroceriesAppConfig',
 ]
 
 MIDDLEWARE = [
