@@ -1,3 +1,25 @@
-nav{
-    margin: 4px 4px 4px 4px;
+nav {
+    margin: 5px 5px 4px 5px;
+    max-width: 100%;
+}
+
+.social-links {
+    text-decoration: none;
+    margin-left: 8px;
+    margin-right: 4px;
+}
+
+.social-links:hover {
+    filter: invert(50%);
+    text-decoration: none;
+}
+
+#footer-card {
+    margin: 4px 5px 8px 5px;
+    max-width: 100%;
+    text-align: right;
+}
+
+#footer-text {
+    margin: 0 0 6px 0;
 }
