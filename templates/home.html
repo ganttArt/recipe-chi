@@ -1,6 +1,42 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
 {% block content %}
-<h1>Home</h1>
+<div class="jumbotron" id="planner-container">
+    <h1>Grocery Planner</h1>
+    <div class="card border-primary mb-3" id="card_for_image">
+        <div class="card-body">
+            <a href='planner'>
+            <img class="image_in_card" src="{% static 'images/home_planner_produce.jpg' %}">
+            </a>
+            <figcaption>Image Credit: Wholesome Culture</figcaption>
+        </div>
+    </div>
+    <hr class="my-4">
+    <p id='planner-description'>Plan your grocery list by choosing from your favorite meals.</p>
+    <p class="lead">
+        <a class="btn btn-primary btn-lg" href="planner" role="button">Start Planning</a>
+    </p>
+</div>
+
+<div class="jumbotron" id="recipes-container">
+    <h1>Recipes</h1>
+    <div class="card border-primary mb-3" id="card_for_image">
+        <div class="card-body">
+            <a href='recipes'>
+                <img class="image_in_card" src="{% static 'images/home_recipies_tkv.jpg' %}">
+            </a>
+            <figcaption>Image Credit: The Korean Vegan</figcaption>
+        </div>
+    </div>
+    <hr class="my-4">
+    <p id='recipes-description'>A curated selection of recipes from top chefs and homemade favorites.</p>
+    <p class="lead">
+        <a class="btn btn-primary btn-lg" href="recipes" role="button">View Recipes</a>
+    </p>
+</div>
 {% endblock content %}
