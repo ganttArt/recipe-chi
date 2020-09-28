@@ -3,12 +3,6 @@ figcaption {
     text-align: right;
 }
 
-.jumbotron {
-    text-align: center;
-    margin: 8px 4px 8px 4px;
-    padding: 20px;
-}
-
 .image_in_card {
     max-width: 100%;
     border: 2px solid rgb(19, 19, 19);
