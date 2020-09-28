@@ -10,5 +10,5 @@ class AboutView(TemplateView):
 class RecipesView(TemplateView):
     template_name = 'recipes/recipes.html'
 
-class PlannerView(TemplateView):
-    template_name = 'grocery_planner/planner.html'
+class MealChoiceView(TemplateView):
+    template_name = 'grocery_planner/gp1-meal-choice.html'
