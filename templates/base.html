@@ -33,9 +33,20 @@
                 </ul>
             </div>
         </nav>
-        {% block content %}
-        {% endblock content %}
-        
+        {% block content %}{% endblock content %}
+        <footer>
+            <div class="card border-primary" id='footer-card'>
+                <div class="card-body">
+                    <p class="card-text" id='footer-text'>Website created by Chris 'CHI' Gantt</p>
+                    <a class='social-links' href="https://github.com/ganttArt" target=”_blank”>
+                        <img src="{% static 'images/github.png' %}" height="30" width="30">
+                    </a>
+                    <a class='social-links' href="https://www.linkedin.com/in/gantt/" target=”_blank”>
+                        <img src="{% static 'images/linkedin.svg' %}" height="30" width="30">
+                    </a>
+                </div>
+              </div>
+        </footer>
         <!-- Bootstrap JavaScript -->
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
