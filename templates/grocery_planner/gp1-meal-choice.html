@@ -1,13 +1,51 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block css %}
-
-{% endblock %}
 <link rel="stylesheet" href="{% static 'css/grocery-planner/gp1-meal-choice.css' %}">
-{% block content %}
+{% endblock %}
 
-<div class="jumbotron">
-    <h1 class="display-3">Meal Choice</h1>
-    <hr class="my-4">
-  </div>
+{% block content %}
+<form>
+    <div class="jumbotron">
+        <div class="card text-white bg-success mb-3 mx-auto" id='page-title'>
+            <h1 class="card-header">Meal Choice</h1>
+        </div>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col" class='meal-name-column'>Meal</th>
+                    <th scope="col">Servings per batch</th>
+                    <th scope="col">Batch Size</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for meal in meal_list %}
+                <tr>
+                    <td scope="row" class='meal-name-column'>{{ meal.name }}</td>
+                    <td>{{ meal.portion_number }}</td>
+                    <td>
+                        <select class="form-control" id="exampleSelect1">
+                            <option>0</option>
+                            <option>1x</option>
+                            <option>2x</option>
+                            <option>3x</option>
+                            <option>4x</option>
+                        </select>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <footer id="checkout-footer">
+        <div class="card border-info" id="footer-card">
+            <div class="card-body">
+                <button type="submit" class="btn btn-success" id='checkout-button'>Checkout</button>
+            </div>
+        </div>
+    </footer>
+</form>
 {% endblock content %}
+
+{% block footer %} {% endblock footer %}
