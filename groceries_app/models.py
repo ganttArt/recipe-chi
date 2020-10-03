@@ -50,6 +50,7 @@ class IngredientQuantity(models.Model):
     quantity = models.FloatField()
     measurement = models.ForeignKey(Measurement, on_delete=models.PROTECT)
     meal_name = models.ForeignKey(Meal, on_delete=models.PROTECT)
+    optional = models.BooleanField(default=False)
 
     def __str__(self):
         return f'{self.ingredient} for {self.meal_name}'
