@@ -1,17 +1,24 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block css %} 
+<link rel="stylesheet" href="{% static 'css/recipes/recipes-list.css' %}">
+{% endblock css %}
+
 {% block content %}
-<h1>Recipes</h1>
-{% for meal in meal_list %}
-<div class="card border-primary mb-3" style="max-width: 20rem;">
-    <a href="{% url 'recipe-detail' meal.pk %}">    
-        <div class="card-header">{{ meal.name }}</div>
-    </a>
-    <div class="card-body">
-        <h4 class="card-title">{{ meal.portion_number }}</h4>
-    </div>
-    
+<div class="jumbotron">
+    <h1 class="display-3">Recipes</h1>
+    <hr class="my-4">
+    {% for meal in meal_list %}
+        <div class="card border-primary recipe-card">
+            <a href="{% url 'recipe-detail' meal.pk %}">    
+                <div class="card-header">{{ meal.name }}</div>
+            </a>
+            <div class="card-body">
+                <h4 class="card-title">{{ meal.portion_number }}</h4>
+            </div>
+        </div>
+    {% endfor %}   
 </div>
-{% endfor %}
+
 {% endblock content %}
