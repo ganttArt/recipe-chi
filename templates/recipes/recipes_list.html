@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<h1>Recipes</h1>
+{% for meal in meal_list %}
+<div class="card border-primary mb-3" style="max-width: 20rem;">
+    <a href="{% url 'recipe-detail' meal.pk %}">    
+        <div class="card-header">{{ meal.name }}</div>
+    </a>
+    <div class="card-body">
+        <h4 class="card-title">{{ meal.portion_number }}</h4>
+    </div>
+    
+</div>
+{% endfor %}
+{% endblock content %}
