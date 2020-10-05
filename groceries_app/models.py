@@ -8,7 +8,7 @@ class Meal(models.Model):
     times_eaten = models.PositiveIntegerField(default=0)
     cook_time = models.PositiveIntegerField(null=True, blank=True)
     portion_number = models.PositiveIntegerField(null=True, blank=True)
-    photo = models.ImageField(null=True, blank=True)
+    photo = models.ImageField(null=True, blank=True, upload_to="gallery")
     description = models.TextField(null=True, blank=True)
     instructions = models.TextField(null=True, blank=True) # add default later
     date_added = models.DateField(auto_now_add=True)

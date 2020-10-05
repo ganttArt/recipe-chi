@@ -10,14 +10,16 @@
     <h1 class="display-3">Recipes</h1>
     <hr class="my-4">
     {% for meal in meal_list %}
-        <div class="card border-primary recipe-card">
-            <a href="{% url 'recipe-detail' meal.pk %}">    
-                <div class="card-header">{{ meal.name }}</div>
+        {% if meal.instructions %}
+            <a href="{% url 'recipe-detail' meal.pk %}">   
+                <div class="card border-primary recipe-card">
+                    <div class="card-header">{{ meal.name }}</div>
+                    <div class="card-body">
+                            <img id='meal-image' src="{{ meal.photo.url }}">
+                    </div>
+                </div>
             </a>
-            <div class="card-body">
-                <h4 class="card-title">{{ meal.portion_number }}</h4>
-            </div>
-        </div>
+        {% endif %}
     {% endfor %}   
 </div>
 
