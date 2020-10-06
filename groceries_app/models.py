@@ -6,7 +6,7 @@ class Meal(models.Model):
     name = models.CharField(max_length=60, unique=True)
     recipe_category = models.CharField(max_length=40)
     times_eaten = models.PositiveIntegerField(default=0)
-    cook_time = models.PositiveIntegerField(null=True, blank=True)
+    cook_time_in_minutes = models.PositiveIntegerField(null=True, blank=True)
     portion_number = models.PositiveIntegerField(null=True, blank=True)
     photo = models.ImageField(null=True, blank=True, upload_to="gallery")
     description = models.TextField(null=True, blank=True)

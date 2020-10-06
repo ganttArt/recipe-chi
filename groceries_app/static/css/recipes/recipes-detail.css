@@ -1,0 +1,35 @@
+pre {
+    padding: 20px;
+    border: 0;
+    font-family: "Neucha", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 18px;
+    letter-spacing: 1px;
+}
+
+p {
+    font-family: "Neucha", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    letter-spacing: 1px;
+}
+
+.display-4 {
+    margin-top: 20px;
+}
+
+.card {
+    margin-top: 20px;
+}
+
+.card-header {
+    font-size: 20px;
+    letter-spacing: 1px;
+}
+
+#instructions {
+    text-align: left;
+    padding: 0;
+}
+
+#detail-photo {
+    max-width: 100%;
+    border: 2px solid black;
+}
