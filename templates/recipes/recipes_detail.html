@@ -11,18 +11,36 @@
     <p class="lead">Cook Time: {{ object.cook_time_in_minutes }} minutes</p>
     <p>Makes {{ object.portion_number }} servings</p>
     <hr class="my-4">
-    <img id="detail-photo" src="{{ object.photo.url }}">
-    <div class="card border-primary mb-3">
+    <div id='image-ingredients-container'>
+        <img id="detail-photo" src="{{ object.photo.url }}">
+
+        <div class="card border-primary mb-3" id='ingredients-card'>
+            <div class="card-header">All Ingredients</div>
+            <div class="card-body">
+                <p id='ingredients'>
+                    Basmati rice<br>
+                    Russet Potato<br>
+                    Ginger<br>
+                    Carrot<br>
+                    Peas<br>
+                    Spinach<br>
+                    Coconut Milk<br>
+                    Curry Powder<br>
+                    Pineapple<br>
+                    Sugar<br>
+                    Salt<br>
+                    Black Pepper
+                </p>
+            </div>
+        </div>
+    </div>    
+    <div class="card border-primary mb-3" id='instructions-card'>
         <div class="card-header">INSTRUCTIONS</div>
         <div class="card-body" id='instructions'>
             {{ object.instructions |safe }}
         </div>
     </div>
-    <div class="card border-primary mb-3">
-        <div class="card-header">All Ingredients</div>
-        <div class="card-body" id='instructions'>
-        </div>
-    </div>
-
+        
+    
 </div>
 {% endblock content %}

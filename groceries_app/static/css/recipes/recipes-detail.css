@@ -31,5 +31,41 @@ p {
 
 #detail-photo {
     max-width: 100%;
-    border: 2px solid black;
+    border: 2px solid #333;
+}
+
+#ingredients {
+    padding: 15px 40px 0px;
+    font-family: "Neucha", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 18px;
+    letter-spacing: 1px;
+    line-height: 2;
+    text-align: left;
+}
+
+@media screen and (min-width: 586px) {
+    #image-ingredients-container {
+        display: inline-block;
+        width: 47%;
+        margin: 0;
+        margin: 0 3% 0 .5%;
+    }
+
+    #detail-photo {
+        max-width: 100%;
+        margin-bottom: 20px;
+    }
+
+    #ingredients-card {
+        width: 100%;
+        display: inline-block;
+        margin: 0;
+    }
+
+    #instructions-card {
+        width: 47%;
+        display: inline-block;
+        vertical-align: top;
+        margin: 0;
+    }
 }
