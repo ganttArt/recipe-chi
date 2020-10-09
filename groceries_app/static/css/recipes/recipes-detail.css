@@ -6,8 +6,9 @@ pre {
     letter-spacing: 1px;
 }
 
-p {
+.sketchy-font {
     font-family: "Neucha", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 18px;
     letter-spacing: 1px;
 }
 
@@ -36,19 +37,22 @@ p {
 
 #ingredients {
     padding: 15px 40px 0px;
-    font-family: "Neucha", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    font-size: 18px;
-    letter-spacing: 1px;
     line-height: 2;
     text-align: left;
 }
 
-@media screen and (min-width: 586px) {
+@media screen and (min-width: 775px) {
     #image-ingredients-container {
-        display: inline-block;
+        display: table-cell;
         width: 47%;
-        margin: 0;
-        margin: 0 3% 0 .5%;
+        padding-right: 10px;
+    }
+
+    #instructions-description-container {
+        display: table-cell;
+        width: 47%;
+        padding-left: 10px;
+        vertical-align: top;
     }
 
     #detail-photo {
@@ -58,14 +62,11 @@ p {
 
     #ingredients-card {
         width: 100%;
-        display: inline-block;
-        margin: 0;
+        margin-top: 0;
     }
 
     #instructions-card {
-        width: 47%;
-        display: inline-block;
-        vertical-align: top;
+        width: 100%;
         margin: 0;
     }
 }

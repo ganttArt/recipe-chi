@@ -11,33 +11,36 @@
     <p class="lead">Cook Time: {{ object.cook_time_in_minutes }} minutes</p>
     <p>Makes {{ object.portion_number }} servings</p>
     <hr class="my-4">
+
     <div id='image-ingredients-container'>
         <img id="detail-photo" src="{{ object.photo.url }}">
-
-        <div class="card border-primary mb-3" id='ingredients-card'>
-            <div class="card-header">All Ingredients</div>
+        <div class="card border-primary" id='ingredients-card'>
+            <div class="card-header">ALL INGREDIENTS</div>
             <div class="card-body">
-                <p id='ingredients'>
-                    Basmati rice<br>
-                    Russet Potato<br>
-                    Ginger<br>
-                    Carrot<br>
-                    Peas<br>
-                    Spinach<br>
-                    Coconut Milk<br>
-                    Curry Powder<br>
-                    Pineapple<br>
-                    Sugar<br>
-                    Salt<br>
-                    Black Pepper
+                <p class='sketchy-font' id='ingredients'>
+                    {% for ingredient in ingredient_list %}
+                        {% if ingredient.measurement == 'To Taste' %}
+                        {% else %}
+                            {{ingredient.quantity}} {{ingredient.measurement}} {{ ingredient.ingredient }}<br>
+                        {% endif %}
+                    {% endfor %} 
                 </p>
             </div>
         </div>
-    </div>    
-    <div class="card border-primary mb-3" id='instructions-card'>
-        <div class="card-header">INSTRUCTIONS</div>
-        <div class="card-body" id='instructions'>
-            {{ object.instructions |safe }}
+    </div>
+    
+    <div id='instructions-description-container'>
+        <div class="card border-primary" id='instructions-card'>
+            <div class="card-header">INSTRUCTIONS</div>
+            <div class="card-body" id='instructions'>
+                {{ object.instructions |safe }}
+            </div>
+        </div>
+        <div class="card border-primary" id='description-card'>
+            <div class="card-header">ABOUT THIS RECIPE</div>
+            <div class="card-body sketchy-font" id='description'>
+                {{ object.description }}
+            </div>
         </div>
     </div>
         
