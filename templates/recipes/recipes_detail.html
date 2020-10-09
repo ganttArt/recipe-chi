@@ -19,9 +19,25 @@
             <div class="card-body">
                 <p class='sketchy-font' id='ingredients'>
                     {% for ingredient in ingredient_list %}
-                        {% if ingredient.measurement == 'To Taste' %}
+                        {% if ingredient.measurement.measurement == 'to taste' %}
+                            <!-- do nothing -->
+                        {% elif ingredient.measurement.measurement == 'Splash' %}
+                            A splash of {{ ingredient.ingredient }}<br>
+                        {% elif ingredient.measurement.measurement == 'Whole' and ingredient.quantity > 1 %}
+                            {{ingredient.quantity|floatformat}} {{ ingredient.ingredient }}s<br>
+                        {% elif ingredient.measurement.measurement == 'Whole' %}
+                            {{ingredient.quantity|floatformat}} {{ ingredient.ingredient }}<br>
+                        {% elif ingredient.quantity > 1 %}
+                            {{ingredient.quantity|floatformat}} {{ingredient.measurement}}s {{ ingredient.ingredient }}<br>
                         {% else %}
-                            {{ingredient.quantity}} {{ingredient.measurement}} {{ ingredient.ingredient }}<br>
+                            {{ingredient.quantity|floatformat}} {{ingredient.measurement}} {{ ingredient.ingredient }}<br>
+                        {% endif %}
+                    {% endfor %}
+                    {% for ingredient in ingredient_list %}
+                        {% if ingredient.measurement.measurement == 'to taste' %}
+                            {{ ingredient.ingredient }} to taste<br>
+                        {% else %}
+                            <!-- do nothing -->
                         {% endif %}
                     {% endfor %} 
                 </p>
