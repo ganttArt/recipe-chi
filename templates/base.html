@@ -19,16 +19,16 @@
             <div class="collapse navbar-collapse" id="navbarColor03">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/">Home</a>
+                        <a class="nav-link" href="{% url 'home' %}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="about">About</a>
+                        <a class="nav-link" href="{% url 'about' %}">About</a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="recipes">Recipes</a>
+                        <a class="nav-link" href="{% url 'recipes' %}">Recipes</a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="planner/meal-choice">Grocery Planner</a>
+                        <a class="nav-link" href="{% url 'meal-choice' %}">Grocery Planner</a>
                     </li>
                 </ul>
             </div>
