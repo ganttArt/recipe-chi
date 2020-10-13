@@ -36,8 +36,6 @@
                     {% for ingredient in ingredient_list %}
                         {% if ingredient.measurement.measurement == 'to taste' %}
                             {{ ingredient.ingredient }} to taste<br>
-                        {% else %}
-                            <!-- do nothing -->
                         {% endif %}
                     {% endfor %} 
                 </p>
