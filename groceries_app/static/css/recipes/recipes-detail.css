@@ -1,0 +1,72 @@
+pre {
+    padding: 20px;
+    border: 0;
+    font-family: "Neucha", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 18px;
+    letter-spacing: 1px;
+}
+
+.sketchy-font {
+    font-family: "Neucha", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 18px;
+    letter-spacing: 1px;
+}
+
+.display-4 {
+    margin-top: 20px;
+}
+
+.card {
+    margin-top: 20px;
+}
+
+.card-header {
+    font-size: 20px;
+    letter-spacing: 1px;
+}
+
+#instructions {
+    text-align: left;
+    padding: 0;
+}
+
+#detail-photo {
+    max-width: 100%;
+    border: 2px solid #333;
+}
+
+#ingredients {
+    padding: 15px 40px 0px;
+    line-height: 2;
+    text-align: left;
+}
+
+@media screen and (min-width: 775px) {
+    #image-ingredients-container {
+        display: table-cell;
+        width: 47%;
+        padding-right: 10px;
+    }
+
+    #instructions-description-container {
+        display: table-cell;
+        width: 47%;
+        padding-left: 10px;
+        vertical-align: top;
+    }
+
+    #detail-photo {
+        max-width: 100%;
+        margin-bottom: 20px;
+    }
+
+    #ingredients-card {
+        width: 100%;
+        margin-top: 0;
+    }
+
+    #instructions-card {
+        width: 100%;
+        margin: 0;
+    }
+}

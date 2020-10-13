@@ -6,9 +6,9 @@ class Meal(models.Model):
     name = models.CharField(max_length=60, unique=True)
     recipe_category = models.CharField(max_length=40)
     times_eaten = models.PositiveIntegerField(default=0)
-    cook_time = models.PositiveIntegerField(null=True, blank=True)
+    cook_time_in_minutes = models.PositiveIntegerField(null=True, blank=True)
     portion_number = models.PositiveIntegerField(null=True, blank=True)
-    photo = models.ImageField(null=True, blank=True)
+    photo = models.ImageField(null=True, blank=True, upload_to="meal_images")
     description = models.TextField(null=True, blank=True)
     instructions = models.TextField(null=True, blank=True) # add default later
     date_added = models.DateField(auto_now_add=True)
@@ -50,7 +50,6 @@ class IngredientQuantity(models.Model):
     quantity = models.FloatField()
     measurement = models.ForeignKey(Measurement, on_delete=models.PROTECT)
     meal_name = models.ForeignKey(Meal, on_delete=models.PROTECT)
-    optional_ingredient = models.BooleanField(default=False)
 
     def __str__(self):
         return f'{self.ingredient} for {self.meal_name}'

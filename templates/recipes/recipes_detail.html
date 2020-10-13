@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/recipes/recipes-detail.css' %}">
+{% endblock css %}
+
+{% block content %}
+<div class="jumbotron">
+    <h1 class="display-4">{{ object.name }}</h1>
+    <p class="lead">Cook Time: {{ object.cook_time_in_minutes }} minutes</p>
+    <p>Makes {{ object.portion_number }} servings</p>
+    <hr class="my-4">
+
+    <div id='image-ingredients-container'>
+        <img id="detail-photo" src="{{ object.photo.url }}">
+        <div class="card border-primary" id='ingredients-card'>
+            <div class="card-header">ALL INGREDIENTS</div>
+            <div class="card-body">
+                <p class='sketchy-font' id='ingredients'>
+                    {% for ingredient in ingredient_list %}
+                        {% if ingredient.measurement.measurement == 'to taste' %}
+                            <!-- do nothing -->
+                        {% elif ingredient.measurement.measurement == 'Splash' %}
+                            A splash of {{ ingredient.ingredient }}<br>
+                        {% elif ingredient.measurement.measurement == 'Whole' and ingredient.quantity > 1 %}
+                            {{ingredient.quantity|floatformat}} {{ ingredient.ingredient }}s<br>
+                        {% elif ingredient.measurement.measurement == 'Whole' %}
+                            {{ingredient.quantity|floatformat}} {{ ingredient.ingredient }}<br>
+                        {% elif ingredient.quantity > 1 %}
+                            {{ingredient.quantity|floatformat}} {{ingredient.measurement}}s {{ ingredient.ingredient }}<br>
+                        {% else %}
+                            {{ingredient.quantity|floatformat}} {{ingredient.measurement}} {{ ingredient.ingredient }}<br>
+                        {% endif %}
+                    {% endfor %}
+                    {% for ingredient in ingredient_list %}
+                        {% if ingredient.measurement.measurement == 'to taste' %}
+                            {{ ingredient.ingredient }} to taste<br>
+                        {% endif %}
+                    {% endfor %} 
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <div id='instructions-description-container'>
+        <div class="card border-primary" id='instructions-card'>
+            <div class="card-header">INSTRUCTIONS</div>
+            <div class="card-body" id='instructions'>
+                {{ object.instructions |safe }}
+            </div>
+        </div>
+        <div class="card border-primary" id='description-card'>
+            <div class="card-header">ABOUT THIS RECIPE</div>
+            <div class="card-body sketchy-font" id='description'>
+                {{ object.description }}
+            </div>
+        </div>
+    </div>
+        
+    
+</div>
+{% endblock content %}

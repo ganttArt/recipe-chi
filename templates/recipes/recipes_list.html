@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %} 
+<link rel="stylesheet" href="{% static 'css/recipes/recipes-list.css' %}">
+{% endblock css %}
+
+{% block content %}
+<div class="jumbotron">
+    <h1 class="display-3">Recipes</h1>
+    <hr class="my-4">
+    {% for meal in meal_list %}
+        {% if meal.instructions %}
+            <a href="{% url 'recipe-detail' meal.pk %}">   
+                <div class="card border-primary recipe-card">
+                    <div class="card-header">{{ meal.name }}</div>
+                    <div class="card-body">
+                            <img id='meal-image' src="{{ meal.photo.url }}">
+                    </div>
+                </div>
+            </a>
+        {% endif %}
+    {% endfor %}   
+</div>
+
+{% endblock content %}
