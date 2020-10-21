@@ -1,0 +1,50 @@
+.jumbotron {
+    text-align: -webkit-center;
+}
+
+.card-body {
+    padding: .5rem;
+}
+
+#text-head {
+    font-size: 23px;
+    max-width: 80%;
+    padding-top: 20px;
+}
+#text-card {
+    font-size: 20px;
+}
+
+#image-card {
+    max-width: 100%;
+    border: 2px solid;
+    margin-top: 20px;
+    /* padding: 5px; */
+    font-size: 25px;
+}
+
+#about-image {
+    max-width: 100%;
+}
+
+@media screen and (min-width: 646px) and (max-width: 1138px) {
+    #image-card {
+        max-width: 50%;
+    }
+}
+
+@media screen and (min-width: 1138px) {
+    #contents {
+        display: flex;
+    }
+
+    #text-card {
+        width: 49%;
+        margin-right: 2%;
+    }
+
+    #image-card {
+        width: 49%;
+        margin-top: 0;
+    }  
+}
