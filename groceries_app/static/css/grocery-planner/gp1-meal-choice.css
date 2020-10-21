@@ -14,6 +14,15 @@
     text-align: left;
 }
 
+.alert {
+    width: 75%;
+    position:fixed;
+    bottom:50%;
+    left:50%;
+    transform: translate(-50%, 0);
+    font-size: 20px;
+}
+
 #page-title {
     max-width: 20rem;
     border: 4px ridge black;

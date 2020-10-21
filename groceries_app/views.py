@@ -1,6 +1,9 @@
 from django.views.generic import TemplateView
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
+from django.shortcuts import render
+from django.contrib import messages
+
 from groceries_app.models import Meal, IngredientQuantity
 
 
@@ -19,6 +22,10 @@ class MealChoiceView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['meal_list'] = Meal.objects.order_by('name')
         return context
+
+    def post(self, request):
+        messages.info(request, "The grocery planning feature is still in development, thanks for trying 🙂")
+        return render(request, 'grocery_planner/gp1-meal-choice.html')
 
 
 class RecipeListView(ListView):
