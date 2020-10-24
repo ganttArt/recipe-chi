@@ -3,6 +3,7 @@ myvenv
 __pycache__
 .DS_Store
 .vscode/
+media/meal_images/
 
 
 # Byte-compiled / optimized / DLL files
