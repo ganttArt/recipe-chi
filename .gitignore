@@ -3,6 +3,7 @@ myvenv
 __pycache__
 .DS_Store
 .vscode/
+.env
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
