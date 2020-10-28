@@ -12,26 +12,19 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 
 import os
 import django_heroku
-import environ
-
-env = environ.Env()
-environ.Env.read_env()
-
+from .heroku_credentials import aws_access_key, aws_secret_key, secret_key
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = os.environ.get('SECRET_KEY')
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = secret_key
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = (os.environ.get('DEBUG_VALUE') == 'True')
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['recipe-chi.herokuapp.com', 'recipechi.com']
 
@@ -133,8 +126,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_ROOT= os.path.join(BASE_DIR, 'media')
 MEDIA_URL= "/media/"
 
-AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
+AWS_ACCESS_KEY_ID = aws_access_key
+AWS_SECRET_ACCESS_KEY = aws_secret_key
 AWS_STORAGE_BUCKET_NAME = 'recipe-chi'
 AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None

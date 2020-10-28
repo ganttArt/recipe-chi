@@ -1,3 +1,0 @@
-To successfully run this program you need to add a .env file to the project directory that will contain environment variables for AWS credentials and a secret key in the format seen in the django-environ docs.
-
-https://django-environ.readthedocs.io/en/latest/#installation
