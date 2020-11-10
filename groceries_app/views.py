@@ -24,7 +24,23 @@ class MealChoiceView(TemplateView):
         return context
 
     def post(self, request):
-        print(request.POST)
+        all_ingredients = {}
+        meals = request.POST
+        for meal, value in meals.items():
+            if meal == 'csrfmiddlewaretoken':
+                pass
+            elif value == '0':
+                pass
+            else:
+                meal_id = Meal.objects.get(name=meal)
+                ingredients = IngredientQuantity.objects.all().filter(meal_name=meal_id.id)
+                for ingredient in ingredients:
+                    print(ingredient)
+                    #will add ingredient to all_ingredients
+                    #each ingredient will have a list of dictionaries or tuples that includes each ingredient entry.
+        
+        #will create a function to go through all_ingredients and make them the final 
+                
         messages.info(request, "The grocery planning feature is still in development, thanks for trying 🙂")
         return render(request, 'grocery_planner/gp1-meal-choice.html')
 
