@@ -17,13 +17,14 @@ class AboutView(TemplateView):
 
 class MealChoiceView(TemplateView):
     template_name = 'grocery_planner/gp1-meal-choice.html'
-    
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['meal_list'] = Meal.objects.order_by('name')
         return context
 
     def post(self, request):
+        print(request.POST)
         messages.info(request, "The grocery planning feature is still in development, thanks for trying 🙂")
         return render(request, 'grocery_planner/gp1-meal-choice.html')
 

@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-<form method="post">
+<form method="POST">
     {% csrf_token %}
     <div class="jumbotron">
         <div class="card text-white bg-success mb-3 mx-auto" id='page-title'>
@@ -22,15 +22,15 @@
             <tbody>
                 {% for meal in meal_list %}
                 <tr>
-                    <td scope="row" class='meal-name-column'>{{ meal.name }}</td>
+                    <td scope="row" class='meal-name-column' >{{ meal.name }}</td>
                     <td>{{ meal.portion_number }}</td>
                     <td>
-                        <select class="form-control" id="exampleSelect1">
-                            <option>0</option>
-                            <option>1x</option>
-                            <option>2x</option>
-                            <option>3x</option>
-                            <option>4x</option>
+                        <select class="form-control" id="exampleSelect1" name='{{meal.name}}'>
+                            <option value='0'>0</option>
+                            <option value='1'>1x</option>
+                            <option value='2'>2x</option>
+                            <option value='3'>3x</option>
+                            <option value='4'>4x</option>
                         </select>
                     </td>
                 </tr>
