@@ -17,6 +17,23 @@ class AboutView(TemplateView):
 
 class MealChoiceView(TemplateView):
     template_name = 'grocery_planner/gp1-meal-choice.html'
+    
+    def convert_to_tsp(self, measurement, quantity):
+        if measurement == 'tbsp':
+            quantity *= 3
+        elif measurement == 'cup':
+            quantity *= 48
+        return quantity
+
+    def check_tsp(self, quantity):
+        measurement = 'tsp'
+        if quantity >= 48:
+            measurement = 'cup'
+            quantity = quantity / 48
+        elif quantity >= 3:
+            measurement = 'tbsp'
+            quantity = quantity / 3
+        return measurement, quantity
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -26,20 +43,41 @@ class MealChoiceView(TemplateView):
     def post(self, request):
         all_ingredients = {}
         meals = request.POST
-        for meal, value in meals.items():
+        for meal, batch_size in meals.items():
             if meal == 'csrfmiddlewaretoken':
                 pass
-            elif value == '0':
+            elif batch_size == '0':
                 pass
             else:
                 meal_id = Meal.objects.get(name=meal)
                 ingredients = IngredientQuantity.objects.all().filter(meal_name=meal_id.id)
                 for ingredient in ingredients:
-                    print(ingredient)
-                    #will add ingredient to all_ingredients
-                    #each ingredient will have a list of dictionaries or tuples that includes each ingredient entry.
-        
-        #will create a function to go through all_ingredients and make them the final 
+                    #prep ingredient variables
+                    quantity = ingredient.quantity * int(batch_size)
+                    measurement = str(ingredient.measurement.measurement)
+                    ingredient = str(ingredient.ingredient)
+                    if measurement == 'cup' or measurement == 'tbsp':
+                        quantity = self.convert_to_tsp(measurement, quantity)
+                        measurement = 'tsp'
+                    elif measurement == 'splash' or measurement == 'pinch':
+                        measurement = 'to taste'
+
+                    # add ingredient to all_ingredients
+                    if ingredient not in all_ingredients:
+                        all_ingredients[ingredient] = {measurement: quantity}
+                    elif measurement in all_ingredients[ingredient]:
+                        all_ingredients[ingredient][measurement] += quantity
+                    else:
+                        all_ingredients[ingredient][measurement] = quantity
+                
+        # normalize tsp, tbsp, cups 
+        for ingredient, measurements in all_ingredients.items():
+            if 'tsp' in measurements:
+                quantity = measurements['tsp']
+                measurement, quantity = self.check_tsp(quantity)
+                if measurement != 'tsp':
+                    measurements[measurement] = quantity
+                    del measurements['tsp']
                 
         messages.info(request, "The grocery planning feature is still in development, thanks for trying 🙂")
         return render(request, 'grocery_planner/gp1-meal-choice.html')
