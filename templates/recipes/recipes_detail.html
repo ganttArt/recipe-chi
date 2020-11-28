@@ -21,11 +21,11 @@
                     {% for ingredient in ingredient_list %}
                         {% if ingredient.measurement.measurement == 'to taste' %}
                             <!-- do nothing -->
-                        {% elif ingredient.measurement.measurement == 'Splash' %}
+                        {% elif ingredient.measurement.measurement == 'splash' %}
                             A splash of {{ ingredient.ingredient }}<br>
-                        {% elif ingredient.measurement.measurement == 'Whole' and ingredient.quantity > 1 %}
+                        {% elif ingredient.measurement.measurement == 'whole' and ingredient.quantity > 1 %}
                             {{ingredient.quantity|floatformat}} {{ ingredient.ingredient }}s<br>
-                        {% elif ingredient.measurement.measurement == 'Whole' %}
+                        {% elif ingredient.measurement.measurement == 'whole' %}
                             {{ingredient.quantity|floatformat}} {{ ingredient.ingredient }}<br>
                         {% elif ingredient.quantity > 1 %}
                             {{ingredient.quantity|floatformat}} {{ingredient.measurement}}s {{ ingredient.ingredient }}<br>
