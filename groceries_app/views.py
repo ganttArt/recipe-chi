@@ -78,9 +78,8 @@ class MealChoiceView(TemplateView):
                 if measurement != 'tsp':
                     measurements[measurement] = quantity
                     del measurements['tsp']
-                
-        messages.info(request, "The grocery planning feature is still in development, thanks for trying 🙂")
-        return render(request, 'grocery_planner/gp1-meal-choice.html')
+        print(all_ingredients)
+        return render(request, 'grocery_planner/gp2-ingredient-list.html', {'ingredients': all_ingredients})
 
 
 class RecipeListView(ListView):

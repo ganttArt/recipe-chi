@@ -1,0 +1,17 @@
+td, th {
+    text-align: left;
+}
+
+.jumbotron {
+    padding-bottom: 0;
+}
+
+.table {
+    width: -webkit-fill-available;
+}
+
+.number-spinner {
+    width: 50px;
+    letter-spacing: 1.5px;
+    padding-left: 5px;
+}
