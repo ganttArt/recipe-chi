@@ -25,11 +25,37 @@ hr {
 
 .number-spinner {
     width: 60px;
+    height: 40px;
     letter-spacing: 1.5px;
-    padding-left: 5px;
+    padding-left: 10px;
+}
+
+.quantity-container {
+    display: flex;
+    flex-wrap: wrap;
 }
 
 #add-ingredient-button {
     margin-bottom: 15px;
     margin-left: 20px;
+}
+
+#exampleSelect1 {
+    max-width: 150px;
+}
+
+#add-ingredient-num-spinner {
+    margin-right: 5px;
+}
+
+@media screen and (max-width: 410px) {
+    #exampleSelect1 {
+        max-width: 80px;
+    }
+}
+
+@media screen and (max-width: 474px) {
+    #exampleSelect1 {
+        margin-top: 5px;
+    }
 }
