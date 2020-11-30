@@ -13,7 +13,7 @@
         <div class="card text-white bg-info mb-3 mx-auto" id='page-title'>
             <h1 class="card-header">Ingredients</h1>
         </div>
-        <table class="table table-hover">
+        <table class="table table-hover" id='ingredients-table'>
             <thead>
                 <tr>
                     <th scope="col" style="color: #dc3545;">Remove</th>
@@ -25,7 +25,7 @@
                 {% for ingredient, measurements in ingredients.items %}
                     {% for measurement, quantity in measurements.items %}
                         <tr>
-                            <td><button type="button" class="btn btn-outline-danger">-</button></td>
+                            <td><button type="button" class="btn btn-outline-danger" value='Delete' onclick="deleteRow(this)">-</button></td>
                             <td scope="row" class='meal-name-column' >{{ ingredient }}</td>
                             <td>
                                 <input type="number" value="{{ quantity }}" min=0 step="any" class='number-spinner'>
@@ -37,7 +37,6 @@
             </tbody>
         </table>
     </div>
-
     <footer id="checkout-footer">
         <div class="card border-success" id="footer-card">
             <div class="card-body">
@@ -46,14 +45,14 @@
         </div>
     </footer>
 </form>
-{% if messages %}
-    {% for message in messages %}
-        <div class="alert alert-dismissible alert-warning">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <p class="mb-0">{{ message }}</p>
-        </div>
-    {% endfor %}
-{% endif %}
 {% endblock content %}
 
-{% block footer %} {% endblock footer %}
+{% block javascript %}
+<script>
+    function deleteRow(row) {
+        var row_index = row.parentNode.parentNode.rowIndex;
+        document.getElementById("ingredients-table").deleteRow(row_index);
+        console.log('deleted')
+    }
+</script>
+{% endblock javascript %}
