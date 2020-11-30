@@ -3,7 +3,6 @@
 {% block css %}
 <link rel="stylesheet" href="{% static 'css/grocery-planner/gp1-meal-choice.css' %}">
 <link rel="stylesheet" href="{% static 'css/grocery-planner/gp2-ingredient-list.css' %}">
-
 {% endblock %}
 
 {% block content %}
@@ -23,19 +22,23 @@
             </thead>
             <tbody>
                 {% for ingredient, measurements in ingredients.items %}
-                    {% for measurement, quantity in measurements.items %}
-                        <tr>
-                            <td><button type="button" class="btn btn-outline-danger" value='Delete' onclick="deleteRow(this)">-</button></td>
-                            <td scope="row" class='meal-name-column' >{{ ingredient }}</td>
-                            <td>
-                                <input type="number" value="{{ quantity }}" min=0 step="any" class='number-spinner'>
-                                {{ measurement }}
-                            </td>
-                        </tr>
-                    {% endfor %}
+                {% for measurement, quantity in measurements.items %}
+                <tr>
+                    <td><button type="button" class="btn btn-outline-danger"
+                            onclick="deleteThisRow(this)">-</button></td>
+                    <td scope="row" class='meal-name-column'>{{ ingredient }}</td>
+                    <td>
+                        <input type="number" value="{{ quantity }}" min=0 step="any" class='number-spinner'>
+                        {{ measurement }}
+                    </td>
+                </tr>
+                {% endfor %}
                 {% endfor %}
             </tbody>
         </table>
+        <hr>
+        <button type="button" class="btn btn-success" id='add-ingredient-button'
+            onclick="addRow()">Add Ingredient</button>
     </div>
     <footer id="checkout-footer">
         <div class="card border-success" id="footer-card">
@@ -46,13 +49,7 @@
     </footer>
 </form>
 {% endblock content %}
-
+{% block footer %}{% endblock footer %}
 {% block javascript %}
-<script>
-    function deleteRow(row) {
-        var row_index = row.parentNode.parentNode.rowIndex;
-        document.getElementById("ingredients-table").deleteRow(row_index);
-        console.log('deleted')
-    }
-</script>
+<script src="{% static 'javascript/gp2-ingredient-list.js' %}"></script>
 {% endblock javascript %}

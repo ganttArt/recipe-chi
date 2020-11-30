@@ -4,7 +4,7 @@ from django.views.generic.detail import DetailView
 from django.shortcuts import render
 from django.contrib import messages
 
-from groceries_app.models import Meal, IngredientQuantity
+from groceries_app.models import Meal, IngredientQuantity, Measurement
 
 
 class HomeView(TemplateView):
@@ -17,7 +17,7 @@ class AboutView(TemplateView):
 
 class MealChoiceView(TemplateView):
     template_name = 'grocery_planner/gp1-meal-choice.html'
-    
+
     def convert_to_tsp(self, measurement, quantity):
         if measurement == 'tbsp':
             quantity *= 3
@@ -52,7 +52,7 @@ class MealChoiceView(TemplateView):
                 meal_id = Meal.objects.get(name=meal)
                 ingredients = IngredientQuantity.objects.all().filter(meal_name=meal_id.id)
                 for ingredient in ingredients:
-                    #prep ingredient variables
+                    # prep ingredient variables
                     quantity = ingredient.quantity * int(batch_size)
                     measurement = str(ingredient.measurement.measurement)
                     ingredient = str(ingredient.ingredient)
@@ -69,8 +69,8 @@ class MealChoiceView(TemplateView):
                         all_ingredients[ingredient][measurement] += quantity
                     else:
                         all_ingredients[ingredient][measurement] = quantity
-                
-        # normalize tsp, tbsp, cups 
+
+        # normalize tsp, tbsp, cups
         for ingredient, measurements in all_ingredients.items():
             if 'tsp' in measurements:
                 quantity = measurements['tsp']
@@ -78,8 +78,14 @@ class MealChoiceView(TemplateView):
                 if measurement != 'tsp':
                     measurements[measurement] = quantity
                     del measurements['tsp']
-        print(all_ingredients)
-        return render(request, 'grocery_planner/gp2-ingredient-list.html', {'ingredients': all_ingredients})
+
+        measurements = Measurement.objects.all()
+        return render(
+            request,
+            'grocery_planner/gp2-ingredient-list.html',
+            {'ingredients': all_ingredients,
+             'measurements': measurements}
+        )
 
 
 class RecipeListView(ListView):
@@ -98,5 +104,6 @@ class RecipeDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['ingredient_list'] = IngredientQuantity.objects.filter(meal_name=context['meal'])
+        context['ingredient_list'] = IngredientQuantity.objects.filter(
+            meal_name=context['meal'])
         return context
