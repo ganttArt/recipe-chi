@@ -1,10 +1,12 @@
 from django.views.generic import TemplateView
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.http import HttpResponse
 
 from groceries_app.models import Meal, IngredientQuantity, Measurement
+
 
 
 class HomeView(TemplateView):
@@ -79,6 +81,13 @@ class MealChoiceView(TemplateView):
                     measurements[measurement] = quantity
                     del measurements['tsp']
 
+        request.session['ingredients'] = all_ingredients
+        return redirect('ingredient-plan')
+
+
+class IngredientPlanView(TemplateView):
+    def get(self, request):
+        all_ingredients = request.session.get('ingredients')
         measurements = Measurement.objects.all()
         return render(
             request,
@@ -86,6 +95,10 @@ class MealChoiceView(TemplateView):
             {'ingredients': all_ingredients,
              'measurements': measurements}
         )
+
+    def post(self, request):
+        ingredients = request.POST
+        return HttpResponse(ingredients)
 
 
 class RecipeListView(ListView):
