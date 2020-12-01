@@ -85,7 +85,7 @@ class MealChoiceView(TemplateView):
         return redirect('ingredient-plan')
 
 
-class IngredientPlanView(TemplateView):
+class IngredientPlanView(TemplateView):    
     def get(self, request):
         all_ingredients = request.session.get('ingredients')
         measurements = Measurement.objects.all()
@@ -93,11 +93,12 @@ class IngredientPlanView(TemplateView):
             request,
             'grocery_planner/gp2-ingredient-list.html',
             {'ingredients': all_ingredients,
-             'measurements': measurements}
+             'all_measurements': measurements}
         )
 
     def post(self, request):
         ingredients = request.POST
+        print(ingredients)
         return HttpResponse(ingredients)
 
 

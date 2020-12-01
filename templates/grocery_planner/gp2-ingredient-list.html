@@ -21,18 +21,28 @@
                 </tr>
             </thead>
             <tbody>
-                {% for ingredient, measurements in ingredients.items %}
-                {% for measurement, quantity in measurements.items %}
-                <tr>
-                    <td><button type="button" class="btn btn-outline-danger" onclick="deleteThisRow(this)">-</button>
-                    </td>
-                    <td scope="row" class='meal-name-column'>{{ ingredient }}</td>
-                    <td>
-                        <input type="number" value="{{ quantity }}" min=0 step="any" class='number-spinner'>
-                        {{ measurement }}
-                    </td>
-                </tr>
-                {% endfor %}
+                {% for ingredient, ingredient_measurements in ingredients.items %}
+                    {% for ingredient_measurement, quantity in ingredient_measurements.items %}
+                        <tr>
+                            <td><button type="button" class="btn btn-outline-danger" onclick="deleteThisRow(this)">-</button>
+                            </td>
+                            <td scope="row" class='meal-name-column'>{{ ingredient }}</td>
+                            <td>
+                                <input type="number" value="{{ quantity }}" min=0 step="any" class='number-spinner' name='{{ ingredient }}'>
+                                <div class='form-group'>
+                                    <select class='form-control' id='exampleSelect1' name='{{ ingredient }}'>  
+                                        {% for measurement in all_measurements %}
+                                            {% if measurement.measurement == ingredient_measurement %}
+                                                <option value='{{ measurement }}' selected>{{ measurement }}</option>
+                                            {% else %}
+                                                <option value='{{ measurement }}'>{{ measurement }}</option>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
                 {% endfor %}
             </tbody>
         </table>
@@ -77,7 +87,7 @@
             <input type="number" value="{{ quantity }}" min=0 step="any" class='number-spinner' id='add-ingredient-num-spinner'>
             <div class='form-group'>
                 <select class='form-control' id='exampleSelect1'>  
-                    {% for measurement in measurements %}  
+                    {% for measurement in all_measurements %}  
                         <option value='{{measurement}}'>{{ measurement }}</option>
                     {% endfor %}
                 </select>
