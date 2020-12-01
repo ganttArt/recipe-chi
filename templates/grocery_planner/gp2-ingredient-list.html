@@ -28,17 +28,20 @@
                             </td>
                             <td scope="row" class='meal-name-column'>{{ ingredient }}</td>
                             <td>
-                                <input type="number" value="{{ quantity }}" min=0 step="any" class='number-spinner' name='{{ ingredient }}'>
-                                <div class='form-group'>
-                                    <select class='form-control' id='exampleSelect1' name='{{ ingredient }}'>  
-                                        {% for measurement in all_measurements %}
-                                            {% if measurement.measurement == ingredient_measurement %}
-                                                <option value='{{ measurement }}' selected>{{ measurement }}</option>
-                                            {% else %}
-                                                <option value='{{ measurement }}'>{{ measurement }}</option>
-                                            {% endif %}
-                                        {% endfor %}
-                                    </select>
+                                <div class='quantity-container'>
+                                    <input type="number" value="{{ quantity }}" min=0 step="any" class='number-spinner'
+                                        name='{{ ingredient }}' id='add-ingredient-num-spinner'>
+                                    <div class='form-group'>
+                                        <select class='form-control' id='exampleSelect1' name='{{ ingredient }}'>
+                                            {% for measurement in all_measurements %}
+                                                {% if measurement.measurement == ingredient_measurement %}
+                                                    <option value='{{ measurement }}' selected>{{ measurement }}</option>
+                                                {% else %}
+                                                    <option value='{{ measurement }}'>{{ measurement }}</option>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </select>
+                                    </div>
                                 </div>
                             </td>
                         </tr>

@@ -48,14 +48,20 @@ hr {
     margin-right: 5px;
 }
 
-@media screen and (max-width: 410px) {
-    #exampleSelect1 {
-        max-width: 80px;
-    }
-}
-
 @media screen and (max-width: 474px) {
     #exampleSelect1 {
         margin-top: 5px;
+    }
+}
+
+@media screen and (max-width: 430px) {
+    .form-control {
+        width: 100px;
+    }
+}
+
+@media screen and (max-width: 410px) {
+    #exampleSelect1 {
+        max-width: 80px;
     }
 }
