@@ -8,7 +8,6 @@ from django.http import HttpResponse
 from groceries_app.models import Meal, IngredientQuantity, Measurement
 
 
-
 class HomeView(TemplateView):
     template_name = 'home.html'
 
@@ -85,7 +84,7 @@ class MealChoiceView(TemplateView):
         return redirect('ingredient-plan')
 
 
-class IngredientPlanView(TemplateView):    
+class IngredientPlanView(TemplateView):
     def get(self, request):
         all_ingredients = request.session.get('ingredients')
         measurements = Measurement.objects.all()
@@ -97,8 +96,15 @@ class IngredientPlanView(TemplateView):
         )
 
     def post(self, request):
-        ingredients = request.POST
-        print(ingredients)
+        ingredients = request.POST.copy()
+        del ingredients['csrfmiddlewaretoken']
+        added_items = zip(ingredients.pop('ingredient'),
+                          ingredients.pop('quantity'),
+                          ingredients.pop('measurement')
+                          )
+        print(list(added_items))
+        for key, value in ingredients.lists():
+            print(key, value)
         return HttpResponse(ingredients)
 
 
