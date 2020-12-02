@@ -81,15 +81,15 @@
 
         ingredient.innerHTML = `
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="Ingredient" id="inputDefault" style="max-width: 250px">
+                <input type="text" class="form-control" placeholder="Ingredient" id="inputDefault" style="max-width: 250px" name='ingredient'>
             </div>`;
         ingredient.style.paddingLeft = 0;
 
         quantity.innerHTML = `
             <div class='quantity-container'>
-            <input type="number" value="{{ quantity }}" min=0 step="any" class='number-spinner' id='add-ingredient-num-spinner'>
+            <input type="number" min=0 step="any" class='number-spinner' id='add-ingredient-num-spinner' name='quantity'>
             <div class='form-group'>
-                <select class='form-control' id='exampleSelect1'>  
+                <select class='form-control' id='exampleSelect1' name='measurement'>  
                     {% for measurement in all_measurements %}  
                         <option value='{{measurement}}'>{{ measurement }}</option>
                     {% endfor %}
