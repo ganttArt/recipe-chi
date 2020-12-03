@@ -24,6 +24,7 @@ class Meal(models.Model):
 
 
 class Category(models.Model):
+    ''' Categories such as Produce, Bakery, Frozen, etc. '''
     category = models.CharField(max_length=50, unique=True)
     
     def __str__(self):
