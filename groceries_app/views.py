@@ -141,11 +141,6 @@ class IngredientPlanView(TemplateView):
         for category, ingredients in final_ingredients.items():
             ingredients.sort(key=lambda i: i['name'])
         
-        for category, ingredients in final_ingredients.items():
-            print(category)
-            for ingredient in ingredients:
-                print(ingredient['name'])
-
         request.session['final_ingredients'] = final_ingredients
         return HttpResponse(final_ingredients)
 

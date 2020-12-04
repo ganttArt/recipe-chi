@@ -92,7 +92,7 @@
 
         quantity.innerHTML = `
             <div class='quantity-container'>
-                <input type="number" min=0 step="any" class='number-spinner' id='add-ingredient-num-spinner' name='quantity' required>
+                <input type="number" min=0 step="any" class='number-spinner' id='add-ingredient-num-spinner' name='quantity' value=1 required>
                 <div class='form-group'>
                     <select class='form-control' id='exampleSelect1' name='measurement' required>  
                         {% for measurement in all_measurements %}  
