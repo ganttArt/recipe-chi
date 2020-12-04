@@ -84,18 +84,6 @@ class MealChoiceView(TemplateView):
         return redirect('ingredient-plan')
 
 
-class IngredientFinal:
-    ''' Class to store the final ingredient information for IngredientPlanView '''
-    def __init__(self, name, quantity, measurement, category):
-        self.name = name
-        self.quantity = quantity
-        self.measurement = measurement
-        self.category = category
-    
-    def __str__(self):
-        return f'{self.name} {self.quantity} {self.measurement}'
-
-
 class IngredientPlanView(TemplateView):
     def get(self, request):
         all_ingredients = request.session.get('ingredients')
@@ -123,37 +111,43 @@ class IngredientPlanView(TemplateView):
                             )
             name, category, quantity, measurement = 0, 1, 2, 3
             for ingredient in added_items:
-                ingredient = IngredientFinal(
-                    ingredient[name],
-                    ingredient[quantity],
-                    ingredient[measurement],
-                    ingredient[category]
-                )
-                if ingredient.category not in final_ingredients:
-                    final_ingredients[ingredient.category] = [ingredient]
+                ingredient = {
+                    'name': ingredient[name],
+                    'quantity': ingredient[quantity],
+                    'measurement': ingredient[measurement],
+                    'category': ingredient[category]
+                }
+                if ingredient['category'] not in final_ingredients:
+                    final_ingredients[ingredient['category']] = [ingredient]
                 else:
-                    final_ingredients[ingredient.category].append(ingredient)
+                    final_ingredients[ingredient['category']].append(ingredient)
 
         # adding ingredients from the previously selected ingredients to final_ingredients
         for ing_name, value in post_ingredients.lists():
-            ingredient = Ingredient.objects.get(ingredient=ing_name)
-            category = ingredient.category.category
+            db_ingredient = Ingredient.objects.get(ingredient=ing_name)
             for i in range(int(len(value) / 2)):
-                quantity = value[i * 2]
-                measurement = value[(i * 2) + 1]
-                final_ingredient = IngredientFinal(ing_name, quantity, measurement, category)
-                if final_ingredient.category not in final_ingredients:
-                    final_ingredients[final_ingredient.category] = [final_ingredient]
+                final_ingredient = {
+                    'name': ing_name,
+                    'quantity': value[i * 2],
+                    'measurement': value[(i * 2) + 1],
+                    'category': db_ingredient.category.category
+                }
+                if final_ingredient['category'] not in final_ingredients:
+                    final_ingredients[final_ingredient['category']] = [final_ingredient]
                 else:
-                    final_ingredients[final_ingredient.category].append(final_ingredient)
+                    final_ingredients[final_ingredient['category']].append(final_ingredient)
         
         # sort ingredient lists
         for category, ingredients in final_ingredients.items():
-            ingredients.sort(key=operator.attrgetter('name'))
+            ingredients.sort(key=lambda i: i['name'])
         
+        for category, ingredients in final_ingredients.items():
+            print(category)
+            for ingredient in ingredients:
+                print(ingredient['name'])
+
         request.session['final_ingredients'] = final_ingredients
-        
-        return HttpResponse('completed')
+        return HttpResponse(final_ingredients)
 
 
 class RecipeListView(ListView):
