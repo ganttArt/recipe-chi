@@ -142,8 +142,17 @@ class IngredientPlanView(TemplateView):
             ingredients.sort(key=lambda i: i['name'])
         
         request.session['final_ingredients'] = final_ingredients
-        return HttpResponse(final_ingredients)
+        return redirect('shopping-list')
+        
 
+class ShoppingListView(TemplateView):
+    def get(self, request):
+        final_ingredients = request.session.get('final_ingredients')
+        return render(
+            request,
+            'grocery_planner/gp3-shopping-list.html',
+            {'final_ingredients': final_ingredients}
+        )
 
 class RecipeListView(ListView):
     template_name = 'recipes/recipes_list.html'
