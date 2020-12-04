@@ -5,8 +5,8 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import HttpResponse
 
-from groceries_app.models import Meal, IngredientQuantity, Measurement
-
+from groceries_app.models import Meal, IngredientQuantity, Measurement, Category, Ingredient
+import operator
 
 class HomeView(TemplateView):
     template_name = 'home.html'
@@ -84,28 +84,76 @@ class MealChoiceView(TemplateView):
         return redirect('ingredient-plan')
 
 
+class IngredientFinal:
+    ''' Class to store the final ingredient information for IngredientPlanView '''
+    def __init__(self, name, quantity, measurement, category):
+        self.name = name
+        self.quantity = quantity
+        self.measurement = measurement
+        self.category = category
+    
+    def __str__(self):
+        return f'{self.name} {self.quantity} {self.measurement}'
+
+
 class IngredientPlanView(TemplateView):
     def get(self, request):
         all_ingredients = request.session.get('ingredients')
         measurements = Measurement.objects.all()
+        categories = Category.objects.all()
         return render(
             request,
             'grocery_planner/gp2-ingredient-list.html',
             {'ingredients': all_ingredients,
-             'all_measurements': measurements}
+             'all_measurements': measurements,
+             'categories': categories}
         )
 
     def post(self, request):
-        ingredients = request.POST.copy()
-        del ingredients['csrfmiddlewaretoken']
-        added_items = zip(ingredients.pop('ingredient'),
-                          ingredients.pop('quantity'),
-                          ingredients.pop('measurement')
-                          )
-        print(list(added_items))
-        for key, value in ingredients.lists():
-            print(key, value)
-        return HttpResponse(ingredients)
+        final_ingredients = {}
+        post_ingredients = request.POST.copy()
+        del post_ingredients['csrfmiddlewaretoken']
+        
+        # adding ingredients from the user added ingredients to final_ingredients
+        if 'ingredient' in post_ingredients:
+            added_items = zip(post_ingredients.pop('ingredient'),
+                            post_ingredients.pop('category'),
+                            post_ingredients.pop('quantity'),
+                            post_ingredients.pop('measurement')
+                            )
+            name, category, quantity, measurement = 0, 1, 2, 3
+            for ingredient in added_items:
+                ingredient = IngredientFinal(
+                    ingredient[name],
+                    ingredient[quantity],
+                    ingredient[measurement],
+                    ingredient[category]
+                )
+                if ingredient.category not in final_ingredients:
+                    final_ingredients[ingredient.category] = [ingredient]
+                else:
+                    final_ingredients[ingredient.category].append(ingredient)
+
+        # adding ingredients from the previously selected ingredients to final_ingredients
+        for ing_name, value in post_ingredients.lists():
+            ingredient = Ingredient.objects.get(ingredient=ing_name)
+            category = ingredient.category.category
+            for i in range(int(len(value) / 2)):
+                quantity = value[i * 2]
+                measurement = value[(i * 2) + 1]
+                final_ingredient = IngredientFinal(ing_name, quantity, measurement, category)
+                if final_ingredient.category not in final_ingredients:
+                    final_ingredients[final_ingredient.category] = [final_ingredient]
+                else:
+                    final_ingredients[final_ingredient.category].append(final_ingredient)
+        
+        # sort ingredient lists
+        for category, ingredients in final_ingredients.items():
+            ingredients.sort(key=operator.attrgetter('name'))
+        
+        request.session['final_ingredients'] = final_ingredients
+        
+        return HttpResponse('completed')
 
 
 class RecipeListView(ListView):

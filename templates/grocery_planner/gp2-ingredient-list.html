@@ -82,19 +82,24 @@
         ingredient.innerHTML = `
             <div class="form-group">
                 <input type="text" class="form-control" placeholder="Ingredient" id="inputDefault" style="max-width: 250px" name='ingredient' required>
+                <select class='form-control' id='exampleSelect1' name='category' required>  
+                        {% for category in categories %}  
+                            <option value='{{ category }}'>{{ category }}</option>
+                        {% endfor %}
+                </select>
             </div>`;
         ingredient.style.paddingLeft = 0;
 
         quantity.innerHTML = `
             <div class='quantity-container'>
-            <input type="number" min=0 step="any" class='number-spinner' id='add-ingredient-num-spinner' name='quantity' required>
-            <div class='form-group'>
-                <select class='form-control' id='exampleSelect1' name='measurement' required>  
-                    {% for measurement in all_measurements %}  
-                        <option value='{{measurement}}'>{{ measurement }}</option>
-                    {% endfor %}
-                </select>
-            </div>
+                <input type="number" min=0 step="any" class='number-spinner' id='add-ingredient-num-spinner' name='quantity' required>
+                <div class='form-group'>
+                    <select class='form-control' id='exampleSelect1' name='measurement' required>  
+                        {% for measurement in all_measurements %}  
+                            <option value='{{measurement}}'>{{ measurement }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
             </div>`;
     }
 </script>
