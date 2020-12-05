@@ -82,7 +82,7 @@
         ingredient.innerHTML = `
             <div class="form-group">
                 <input type="text" class="form-control" placeholder="Ingredient" id="inputDefault" style="max-width: 250px" name='ingredient' required>
-                <select class='form-control' id='exampleSelect1' name='category' required>  
+                <select class='form-control' id='select-category' name='category' required>  
                         {% for category in categories %}
                             <option value='{{ category }}'>{{ category }}</option>
                         {% endfor %}

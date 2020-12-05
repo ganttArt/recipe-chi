@@ -48,6 +48,15 @@ hr {
     margin-right: 5px;
 }
 
+#select-category {
+    max-width: 250px;
+    margin-top: 5px;
+}
+
+.form-group {
+    margin-bottom: 0;
+}
+
 @media screen and (max-width: 474px) {
     #exampleSelect1 {
         margin-top: 5px;
