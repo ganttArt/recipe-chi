@@ -85,6 +85,12 @@ class MealChoiceView(TemplateView):
 
 
 class IngredientPlanView(TemplateView):
+    def float_zero_to_int(self, number):
+        if str(number).endswith('.0'):
+            return str(number)[:-2]
+        else:
+            return number
+
     def get(self, request):
         all_ingredients = request.session.get('ingredients')
         measurements = Measurement.objects.all()
@@ -113,7 +119,7 @@ class IngredientPlanView(TemplateView):
             for ingredient in added_items:
                 ingredient = {
                     'name': ingredient[name],
-                    'quantity': ingredient[quantity],
+                    'quantity': self.float_zero_to_int(ingredient[quantity]),
                     'measurement': ingredient[measurement],
                     'category': ingredient[category]
                 }
@@ -128,7 +134,7 @@ class IngredientPlanView(TemplateView):
             for i in range(int(len(value) / 2)):
                 final_ingredient = {
                     'name': ing_name,
-                    'quantity': value[i * 2],
+                    'quantity': self.float_zero_to_int(value[i * 2]),
                     'measurement': value[(i * 2) + 1],
                     'category': db_ingredient.category.category
                 }
