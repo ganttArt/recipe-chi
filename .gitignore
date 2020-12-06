@@ -4,7 +4,6 @@ __pycache__
 .DS_Store
 .vscode/
 .env
-heroku_credentials.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
