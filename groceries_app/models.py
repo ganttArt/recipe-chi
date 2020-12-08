@@ -23,19 +23,12 @@ class Meal(models.Model):
         return self.name
 
 
-class Ingredient(models.Model):
-    specialty_stores = [
-        ('vegan', 'Vegan Specialty'),
-        ('indian', 'Indian Grocery'),
-        ('asian', 'Asian Grocery'),
-        ('ethiopian', 'Ethiopian Grocery'),
-    ]
-    ingredient = models.CharField(max_length=60, unique=True)
-    category = models.CharField(max_length=20, null=True, blank=True) # potentially add choices later when I get a good understanding of what the choices are
-    specialty_location = models.CharField(max_length=10, null=True, blank=True, choices=specialty_stores)
-
+class Category(models.Model):
+    ''' Categories such as Produce, Bakery, Frozen, etc. '''
+    category = models.CharField(max_length=50, unique=True)
+    
     def __str__(self):
-        return self.ingredient
+        return self.category
 
 
 class Measurement(models.Model):
@@ -43,6 +36,14 @@ class Measurement(models.Model):
     
     def __str__(self):
         return self.measurement
+
+
+class Ingredient(models.Model):
+    ingredient = models.CharField(max_length=60, unique=True)
+    category = models.ForeignKey(Category, on_delete=models.PROTECT, default=1)
+
+    def __str__(self):
+        return self.ingredient
 
 
 class IngredientQuantity(models.Model):
