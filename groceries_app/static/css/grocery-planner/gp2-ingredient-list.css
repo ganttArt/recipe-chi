@@ -1,0 +1,76 @@
+td, th {
+    text-align: left;
+    vertical-align: baseline;
+}
+
+hr {
+    border: 1px solid black;
+}
+
+.table td {
+    vertical-align: baseline;
+}
+
+.jumbotron {
+    text-align: left;
+}
+
+.card-header {
+    text-align: center;
+}
+
+.table {
+    width: -webkit-fill-available;
+}
+
+.number-spinner {
+    width: 60px;
+    height: 40px;
+    letter-spacing: 1.5px;
+    padding-left: 10px;
+}
+
+.quantity-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#add-ingredient-button {
+    margin-bottom: 15px;
+    margin-left: 20px;
+}
+
+#exampleSelect1 {
+    max-width: 150px;
+}
+
+#add-ingredient-num-spinner {
+    margin-right: 5px;
+}
+
+#select-category {
+    max-width: 250px;
+    margin-top: 5px;
+}
+
+.form-group {
+    margin-bottom: 0;
+}
+
+@media screen and (max-width: 474px) {
+    #exampleSelect1 {
+        margin-top: 5px;
+    }
+}
+
+@media screen and (max-width: 430px) {
+    .form-control {
+        width: 100px;
+    }
+}
+
+@media screen and (max-width: 410px) {
+    #exampleSelect1 {
+        max-width: 80px;
+    }
+}

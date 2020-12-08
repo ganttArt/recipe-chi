@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/grocery-planner/gp1-meal-choice.css' %}">
+<link rel="stylesheet" href="{% static 'css/grocery-planner/gp2-ingredient-list.css' %}">
+{% endblock %}
+
+{% block content %}
+<form method="POST">
+    {% csrf_token %}
+    <div class="jumbotron">
+        <div class="card text-white bg-info mb-3 mx-auto" id='page-title'>
+            <h1 class="card-header">Ingredients</h1>
+        </div>
+        <table class="table table-hover" id='ingredients-table'>
+            <thead>
+                <tr>
+                    <th scope="col" style="color: #dc3545;">Remove</th>
+                    <th scope="col">Ingredient</th>
+                    <th scope="col">Quantity</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ingredient, ingredient_measurements in ingredients.items %}
+                    {% for ingredient_measurement, quantity in ingredient_measurements.items %}
+                        <tr>
+                            <td><button type="button" class="btn btn-outline-danger" onclick="deleteThisRow(this)">-</button>
+                            </td>
+                            <td scope="row" class='meal-name-column'>{{ ingredient }}</td>
+                            <td>
+                                <div class='quantity-container'>
+                                    <input type="number" value="{{ quantity }}" min=0 step="any" class='number-spinner'
+                                        name='{{ ingredient }}' id='add-ingredient-num-spinner'>
+                                    <div class='form-group'>
+                                        <select class='form-control' id='exampleSelect1' name='{{ ingredient }}'>
+                                            {% for measurement in all_measurements %}
+                                                {% if measurement.measurement == ingredient_measurement %}
+                                                    <option value='{{ measurement }}' selected>{{ measurement }}</option>
+                                                {% else %}
+                                                    <option value='{{ measurement }}'>{{ measurement }}</option>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% endfor %}
+            </tbody>
+        </table>
+        <hr>
+        <button type="button" class="btn btn-success" id='add-ingredient-button' onclick="addRow()">Add
+            Ingredient</button>
+    </div>
+    <footer id="checkout-footer">
+        <div class="card border-success" id="footer-card">
+            <div class="card-body">
+                <button type="submit" class="btn btn-info" id='checkout-button'>Checkout</button>
+            </div>
+        </div>
+    </footer>
+</form>
+{% endblock content %}
+{% block footer %}{% endblock footer %}
+{% block javascript %}
+<script>
+    function deleteThisRow(row) {
+        var row_index = row.parentNode.parentNode.rowIndex;
+        document.getElementById("ingredients-table").deleteRow(row_index);
+    }
+
+    function addRow() {
+        var table = document.getElementById("ingredients-table");
+        var row = table.insertRow(-1);
+        var deleteButton = row.insertCell(-1);
+        var ingredient = row.insertCell(-1);
+        var quantity = row.insertCell(-1);
+
+        deleteButton.innerHTML = "<button type='button' class='btn btn-outline-danger' onclick='deleteThisRow(this)'>-</button>"
+
+        ingredient.innerHTML = `
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Ingredient" id="inputDefault" style="max-width: 250px" name='ingredient' required>
+                <select class='form-control' id='select-category' name='category' required>  
+                        {% for category in categories %}
+                            <option value='{{ category }}'>{{ category }}</option>
+                        {% endfor %}
+                </select>
+            </div>`;
+        ingredient.style.paddingLeft = 0;
+
+        quantity.innerHTML = `
+            <div class='quantity-container'>
+                <input type="number" min=0 step="any" class='number-spinner' id='add-ingredient-num-spinner' name='quantity' value=1 required>
+                <div class='form-group'>
+                    <select class='form-control' id='exampleSelect1' name='measurement' required>  
+                        {% for measurement in all_measurements %}
+                            {% if measurement.measurement == 'whole' %}
+                                <option value='{{measurement}}' selected>{{ measurement }}</option>
+                            {% else %}
+                                <option value='{{measurement}}'>{{ measurement }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>`;
+    }
+</script>
+{% endblock javascript %}

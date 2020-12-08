@@ -1,0 +1,25 @@
+#ingredient-quantity {
+    letter-spacing: 2px;
+}
+
+.table-dark {
+    pointer-events: none;
+}
+
+[type="checkbox"]:checked:after {
+    color:#dc3545;
+}
+
+#checkbox-cell {
+    padding-left: 0;
+    padding-right: 0;
+    width: 40px;
+}
+
+.form-check {
+    padding-left: 10px;
+}
+
+.jumbotron {
+    margin-bottom: 8px;
+}
