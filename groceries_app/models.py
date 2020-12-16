@@ -19,6 +19,9 @@ class Meal(models.Model):
     affiliate_link = models.URLField(null=True, blank=True)
     other_link = models.URLField(null=True, blank=True)
     
+    class Meta:
+        ordering = ['-id']
+
     def __str__(self):
         return self.name
 
@@ -27,6 +30,10 @@ class Category(models.Model):
     ''' Categories such as Produce, Bakery, Frozen, etc. '''
     category = models.CharField(max_length=50, unique=True)
     
+    class Meta:
+        ordering = ['category']
+        verbose_name_plural = "categories"
+
     def __str__(self):
         return self.category
 
@@ -34,6 +41,9 @@ class Category(models.Model):
 class Measurement(models.Model):
     measurement = models.CharField(max_length=20, unique=True)
     
+    class Meta:
+        ordering = ['measurement']
+
     def __str__(self):
         return self.measurement
 
@@ -41,7 +51,10 @@ class Measurement(models.Model):
 class Ingredient(models.Model):
     ingredient = models.CharField(max_length=60, unique=True)
     category = models.ForeignKey(Category, on_delete=models.PROTECT, default=1)
-
+    
+    class Meta:
+        ordering = ['ingredient']
+    
     def __str__(self):
         return self.ingredient
 
@@ -51,6 +64,9 @@ class IngredientQuantity(models.Model):
     quantity = models.FloatField()
     measurement = models.ForeignKey(Measurement, on_delete=models.PROTECT)
     meal_name = models.ForeignKey(Meal, on_delete=models.PROTECT)
+
+    class Meta:
+        verbose_name_plural = 'Ingredient Quantities'
 
     def __str__(self):
         return f'{self.ingredient} for {self.meal_name}'
