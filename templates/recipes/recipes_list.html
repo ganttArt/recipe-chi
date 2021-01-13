@@ -20,7 +20,19 @@
                 </div>
             </a>
         {% endif %}
-    {% endfor %}   
+    {% endfor %}
+    <hr class="my-4">
+    <h2>Instruction-less Recipes</h2>
+    <p style="margin-bottom: 20px;">We'll tell you the ingredients but you have to figure out how to make it. 😆😈</p>
+    {% for meal in meal_list %}
+        {% if not meal.instructions %}
+            <a href="{% url 'recipe-detail-simple' meal.pk %}">  
+                <div class="card border-primary instructionless-recipe-card">
+                    <div class="card-body">{{ meal.name }}</div>
+                </div>
+            </a>
+        {% endif %}
+    {% endfor %}
 </div>
 
 {% endblock content %}

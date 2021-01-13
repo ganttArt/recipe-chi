@@ -18,6 +18,12 @@
     border: 2px solid black;
 }
 
+.instructionless-recipe-card {
+    display: inline-block;
+    width: fit-content;
+    margin: 0px 10px 15px;
+}
+
 @media screen and (min-width: 501px) {
     .recipe-card {
         width: 47%;
